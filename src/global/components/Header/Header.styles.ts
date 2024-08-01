@@ -1,5 +1,5 @@
 import { styled } from "styled-components"
-import Logo from "../../assets/logo.svg"
+import Logo from "../../../assets/logo.svg"
 import { Timer, Scroll } from "@phosphor-icons/react"
 
 export const S = {
@@ -18,14 +18,14 @@ export const S = {
     display: flex;
     gap: 2.0938rem;
   `,
-  TimerIcon: styled(Timer).attrs({ size: 27 })`
+  TimerIcon: styled(Timer).attrs({ size: 32 })`
     cursor: pointer;
     transition: color 0.2s;
     &:hover {
       color: ${({ theme }) => theme.green_500};
     }
   `,
-  ScrollIcon: styled(Scroll).attrs({ size: 26 })`
+  ScrollIcon: styled(Scroll).attrs({ size: 32 })`
     cursor: pointer;
     transition: color 0.2s;
     &:hover {
