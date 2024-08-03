@@ -1,1 +1,1 @@
-export * from "./Header.screen"
+export * from "./Header"

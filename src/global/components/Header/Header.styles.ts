@@ -7,25 +7,24 @@ export const S = {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 5rem;
   `,
   Logo: styled.img.attrs({ src: Logo })`
-    width: 2.5rem;
-    height: 2.5rem;
+    width: 2.2rem;
+    height: 2.2rem;
     cursor: pointer;
   `,
   IconsContainer: styled.div`
     display: flex;
     gap: 2.0938rem;
   `,
-  TimerIcon: styled(Timer).attrs({ size: 32 })`
+  TimerIcon: styled(Timer).attrs({ size: 28 })`
     cursor: pointer;
     transition: color 0.2s;
     &:hover {
       color: ${({ theme }) => theme.green_500};
     }
   `,
-  ScrollIcon: styled(Scroll).attrs({ size: 32 })`
+  ScrollIcon: styled(Scroll).attrs({ size: 28 })`
     cursor: pointer;
     transition: color 0.2s;
     &:hover {
