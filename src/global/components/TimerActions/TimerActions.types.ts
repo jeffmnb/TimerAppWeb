@@ -1,6 +1,6 @@
-import { FieldValues, UseFormRegister } from "react-hook-form"
+import { UseFormRegister } from "react-hook-form"
+import { FormSchemaInput } from "../../../pages/Home/Home.types"
 
 export type TimerActionsProps = {
-  nameInputRegister: UseFormRegister<FieldValues>
-  timeInputRegister: UseFormRegister<FieldValues>
+  register: UseFormRegister<FormSchemaInput>
 }

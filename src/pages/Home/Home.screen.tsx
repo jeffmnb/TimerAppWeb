@@ -6,15 +6,15 @@ import { useHomePage } from "./Home.logic.tsx"
 import { TimerActions } from "../../global/components/TimerActions"
 
 export const Home: React.FC = () => {
-  const { register, handleCreateNewCycle, handleSubmit, isSubmitDisabled } =
+  const { register, handleCreateNewCycle, handleSubmit, isValidForm } =
     useHomePage()
 
   return (
     <S.Container>
-      <TimerActions nameInputRegister={register} timeInputRegister={register} />
+      <TimerActions register={register} />
       <CountDown />
       <StartButton
-        disabled={isSubmitDisabled}
+        disabled={!isValidForm}
         onClick={handleSubmit(handleCreateNewCycle)}
       />
     </S.Container>
