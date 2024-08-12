@@ -1,13 +1,12 @@
 import React from "react"
-import { Outlet } from "react-router-dom"
 import { Header } from "../global/components/Header"
-import { GlobalLayoutContainer } from "./GlobalLayout.styles"
+import { S } from "./GlobalLayout.styles"
 
 export const GlobalLayout: React.FC = () => {
   return (
-    <GlobalLayoutContainer>
+    <S.GlobalLayoutContainer>
       <Header />
-      <Outlet />
-    </GlobalLayoutContainer>
+      <S.Outlet />
+    </S.GlobalLayoutContainer>
   )
 }

@@ -1,8 +1,8 @@
 import { styled } from "styled-components"
 import {
   HISTORY_COLOR_STATUS,
-  HistoryItemProps,
   HISTORY_TITLE_ITEM,
+  HistoryItemProps,
 } from "./History.types"
 
 export const S = {

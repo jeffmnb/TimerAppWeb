@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { FormSchemaInput, FormSchemaOutput } from "./Home.types"
-import { formDefaultValues, formSchema } from "./Home.utils"
+import { differenceInSeconds } from "date-fns"
+import { Cycle, FormSchemaInput, FormSchemaOutput } from "./Home.types"
+import { formDefaultValues, formSchema, returnCycleTime } from "./Home.utils"
+import { useEffect, useState } from "react"
 
 export const useHomePage = () => {
   const {
@@ -14,15 +16,73 @@ export const useHomePage = () => {
     defaultValues: formDefaultValues,
   })
 
-  const handleCreateNewCycle = (data: FormSchemaOutput) => {
-    console.log(data.name)
+  const [cycleList, setCycleList] = useState<Cycle[]>([])
+  const [actualActiveCycle, setActualActiveCycle] = useState<Cycle | null>(null)
+  const [secondsPassed, setSecondsPassed] = useState<number>(0)
+
+  const handleCreateNewCycle = ({ cycleTime, taskname }: FormSchemaOutput) => {
+    const newCycle: Cycle = {
+      id: new Date().getTime().toString(),
+      startTime: new Date(),
+      cycleTime,
+      taskname,
+      status: "progress",
+    }
+    setCycleList((cycle) => [...cycle, newCycle])
+    setActualActiveCycle(newCycle)
     resetForm()
   }
 
+  const handleInterruptCycle = () => {
+    setActualActiveCycle(null)
+    setSecondsPassed(0)
+    resetForm()
+
+    setCycleList((currentList) =>
+      currentList.map((cycle) =>
+        cycle.id === actualActiveCycle?.id
+          ? { ...cycle, status: "interrupted" }
+          : cycle,
+      ),
+    )
+  }
+
+  const provideCycleTime = () => {
+    return returnCycleTime(cycleList, actualActiveCycle, secondsPassed)
+  }
+
+  useEffect(() => {
+    let cycleInterval: NodeJS.Timeout
+    if (actualActiveCycle?.id) {
+      cycleInterval = setInterval(() => {
+        setSecondsPassed(
+          differenceInSeconds(new Date(), actualActiveCycle.startTime),
+        )
+      }, 1000)
+    }
+    return () => clearInterval(cycleInterval)
+  }, [actualActiveCycle])
+
+  useEffect(() => {
+    const { finalMinutes, finalSeconds } = returnCycleTime(
+      cycleList,
+      actualActiveCycle,
+      secondsPassed,
+    )
+
+    if (!actualActiveCycle) document.title = "TimerApp"
+    if (actualActiveCycle) document.title = `${finalMinutes}:${finalSeconds}`
+  }, [actualActiveCycle, cycleList, secondsPassed])
+
   return {
+    cycleList,
     isValidForm,
+    secondsPassed,
+    actualActiveCycle,
     register,
     handleSubmit,
+    provideCycleTime,
     handleCreateNewCycle,
+    handleInterruptCycle,
   }
 }

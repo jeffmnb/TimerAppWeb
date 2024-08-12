@@ -7,7 +7,7 @@ import { GlobalLayout } from "../layouts/GlobalLayout"
 export const Router: React.FC = () => {
   return (
     <Routes>
-      <Route path="/" element={<GlobalLayout />}>
+      <Route element={<GlobalLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/history" element={<History />} />
       </Route>

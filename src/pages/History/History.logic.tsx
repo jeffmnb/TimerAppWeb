@@ -17,7 +17,7 @@ export const useHistoryPage = () => {
     },
     {
       begin: "Há 1 hora",
-      status: "stoped",
+      status: "interrupted",
       task: "Estudar React 3",
       time: "25 minutos",
     },

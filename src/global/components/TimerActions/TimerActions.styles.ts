@@ -14,6 +14,10 @@ const BaseInput = styled.input`
     display: none !important;
   }
 
+  &:hover {
+    cursor: ${({ disabled }) => disabled && " not-allowed"};
+  }
+
   &:focus {
     border-bottom: 2px solid ${({ theme }) => theme.green_500};
     outline: none;

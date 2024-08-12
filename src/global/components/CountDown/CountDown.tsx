@@ -3,7 +3,7 @@ import { S } from "./CountDown.styles"
 import { CountDownProps } from "./CountDown.types"
 
 export const CountDown: React.FC<CountDownProps> = ({
-  returnCycleTime: { finalMinutes, finalSeconds },
+  provideCycleTime: { finalMinutes, finalSeconds },
 }) => {
   return (
     <S.CountDownContainer>

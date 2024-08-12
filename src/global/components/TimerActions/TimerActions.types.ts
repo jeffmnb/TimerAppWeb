@@ -3,4 +3,5 @@ import { FormSchemaInput } from "../../../pages/Home/Home.types"
 
 export type TimerActionsProps = {
   register: UseFormRegister<FormSchemaInput>
+  enableFields: boolean
 }

@@ -37,7 +37,7 @@ module.exports = {
     "sort-keys-fix/sort-keys-fix": "off",
     "no-alert": "off",
     complexity: ["warn", 15],
-    "no-shadow": "warn",
+    "no-shadow": "off",
     "no-prototype-builtins": "off",
     "no-empty-pattern": "off",
     "jsx-a11y/no-autofocus": "off",
