@@ -1,8 +1,9 @@
 import { Play } from "@phosphor-icons/react"
 import { styled } from "styled-components"
+import { ActionButtonProps } from "./ActionButton.types"
 
 export const S = {
-  Container: styled.button`
+  Container: styled.button<Pick<ActionButtonProps, "icon">>`
     display: flex;
     justify-content: center;
     gap: 0.5rem;
@@ -10,7 +11,8 @@ export const S = {
     max-width: 41rem;
     width: 100%;
     height: 4rem;
-    background-color: ${({ theme }) => theme.green_500};
+    background-color: ${({ theme, icon }) =>
+      icon.displayName === "HandPalm" ? theme.red_500 : theme.green_500};
     opacity: ${({ disabled }) => disabled && 0.5};
     color: ${({ theme }) => theme.white};
     font-weight: 600;

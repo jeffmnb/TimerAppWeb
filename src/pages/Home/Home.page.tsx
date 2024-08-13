@@ -1,11 +1,11 @@
 import React from "react"
 import { S } from "./Home.styles.ts"
-import { CountDown } from "../../global/components/CountDown/index.ts"
+import { CountDown } from "./components/CountDown/index.ts"
 import { useHomePage } from "./Home.logic.tsx"
-import { TimerActions } from "../../global/components/TimerActions/index.ts"
-import { InterruptButton } from "../../global/components/InterruptButton/InterruptButton.tsx"
 import { Render } from "../../global/components/Render/Render.tsx"
-import { StartButton } from "../../global/components/StartButton/StartButton.tsx"
+import { TimerActions } from "./components/TimerActions/TimerActions.tsx"
+import { HandPalm, Play } from "@phosphor-icons/react"
+import { ActionButton } from "../../global/components/ActionButton/ActionButton.tsx"
 
 export const Home: React.FC = () => {
   const {
@@ -23,13 +23,17 @@ export const Home: React.FC = () => {
       <TimerActions enableFields={!!actualActiveCycle} register={register} />
       <CountDown provideCycleTime={provideCycleTime()} />
       <Render.If isTrue={!actualActiveCycle}>
-        <StartButton
+        <ActionButton
+          icon={Play}
+          title="Começar"
           disabled={!isValidForm}
           onClick={handleSubmit(handleCreateNewCycle)}
         />
       </Render.If>
       <Render.If isTrue={!!actualActiveCycle}>
-        <InterruptButton
+        <ActionButton
+          icon={HandPalm}
+          title="Interromper"
           disabled={isValidForm}
           onClick={handleInterruptCycle}
         />

@@ -1,7 +1,7 @@
 import React from "react"
 import { S } from "./TimerActions.styles"
-import { DataListSuggestions } from "../DataListSuggestions"
 import { TimerActionsProps } from "./TimerActions.types"
+import { DataListSuggestions } from "../DataListSuggestions"
 
 export const TimerActions: React.FC<TimerActionsProps> = ({
   register,
