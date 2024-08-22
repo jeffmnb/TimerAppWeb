@@ -3,7 +3,7 @@ import { S } from "./History.styles"
 import { useHistoryPage } from "./History.logic"
 
 export const History: React.FC = () => {
-  const { histories } = useHistoryPage()
+  const { history } = useHistoryPage()
 
   return (
     <S.Container>
@@ -19,7 +19,7 @@ export const History: React.FC = () => {
             </S.Tr>
           </S.Thead>
           <S.Tbody>
-            {histories.map(({ begin, status, task, time }) => (
+            {history.map(({ begin, status, task, time }) => (
               <S.Tr key={task}>
                 <S.Td>{task}</S.Td>
                 <S.Td>{time}</S.Td>

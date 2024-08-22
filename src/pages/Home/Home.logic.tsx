@@ -4,9 +4,11 @@ import { differenceInSeconds } from "date-fns"
 import { Cycle, FormSchemaInput, FormSchemaOutput } from "./Home.types"
 import { formDefaultValues, formSchema, returnCycleTime } from "./Home.utils"
 import { useEffect, useState } from "react"
+import { useStore } from "../../store"
 
 export const useHomePage = () => {
   const {
+    control,
     register,
     handleSubmit,
     reset: resetForm,
@@ -15,6 +17,8 @@ export const useHomePage = () => {
     resolver: zodResolver(formSchema),
     defaultValues: formDefaultValues,
   })
+
+  const { setHistory } = useStore()
 
   const [cycleList, setCycleList] = useState<Cycle[]>([])
   const [actualActiveCycle, setActualActiveCycle] = useState<Cycle | null>(null)
@@ -31,6 +35,7 @@ export const useHomePage = () => {
     setCycleList((cycle) => [...cycle, newCycle])
     setActualActiveCycle(newCycle)
     resetForm()
+    setHistory(newCycle)
   }
 
   const handleInterruptCycle = () => {
@@ -52,7 +57,7 @@ export const useHomePage = () => {
   }
 
   useEffect(() => {
-    let cycleInterval: NodeJS.Timeout
+    let cycleInterval: number
     if (actualActiveCycle?.id) {
       cycleInterval = setInterval(() => {
         setSecondsPassed(
@@ -75,6 +80,7 @@ export const useHomePage = () => {
   }, [actualActiveCycle, cycleList, secondsPassed])
 
   return {
+    control,
     cycleList,
     isValidForm,
     secondsPassed,
