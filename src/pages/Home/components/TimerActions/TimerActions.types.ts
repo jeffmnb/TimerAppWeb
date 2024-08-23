@@ -1,7 +1,12 @@
-import { UseFormRegister } from "react-hook-form"
-import { FormSchemaInput } from "../../Home.types"
+import { Control } from "react-hook-form"
 
 export type TimerActionsProps = {
-  register: UseFormRegister<FormSchemaInput>
+  control: Control<
+    {
+      taskname: string
+      cycleTime: number
+    },
+    any
+  >
   enableFields: boolean
 }

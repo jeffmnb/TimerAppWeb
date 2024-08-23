@@ -9,7 +9,6 @@ import { useStore } from "../../store"
 export const useHomePage = () => {
   const {
     control,
-    register,
     handleSubmit,
     reset: resetForm,
     formState: { isValid: isValidForm },
@@ -85,7 +84,6 @@ export const useHomePage = () => {
     isValidForm,
     secondsPassed,
     actualActiveCycle,
-    register,
     handleSubmit,
     provideCycleTime,
     handleCreateNewCycle,

@@ -11,7 +11,7 @@ export const Home: React.FC = () => {
   const {
     isValidForm,
     actualActiveCycle,
-    register,
+    control,
     handleSubmit,
     provideCycleTime,
     handleCreateNewCycle,
@@ -20,7 +20,7 @@ export const Home: React.FC = () => {
 
   return (
     <S.Container>
-      <TimerActions enableFields={!!actualActiveCycle} register={register} />
+      <TimerActions enableFields={!!actualActiveCycle} control={control} />
       <CountDown provideCycleTime={provideCycleTime()} />
       <Render.If isTrue={!actualActiveCycle}>
         <ActionButton
