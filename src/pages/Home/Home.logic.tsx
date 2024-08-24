@@ -7,18 +7,13 @@ import { useEffect, useState } from "react"
 import { useStore } from "../../store"
 
 export const useHomePage = () => {
-  const {
-    control,
-    handleSubmit,
-    reset: resetForm,
-    formState: { isValid: isValidForm },
-  } = useForm<FormSchemaInput>({
+  const cycleForm = useForm<FormSchemaInput>({
     resolver: zodResolver(formSchema),
     defaultValues: formDefaultValues,
   })
 
+  const { reset: resetForm } = cycleForm
   const { setHistory } = useStore()
-
   const [cycleList, setCycleList] = useState<Cycle[]>([])
   const [actualActiveCycle, setActualActiveCycle] = useState<Cycle | null>(null)
   const [secondsPassed, setSecondsPassed] = useState<number>(0)
@@ -79,12 +74,10 @@ export const useHomePage = () => {
   }, [actualActiveCycle, cycleList, secondsPassed])
 
   return {
-    control,
     cycleList,
-    isValidForm,
+    cycleForm,
     secondsPassed,
     actualActiveCycle,
-    handleSubmit,
     provideCycleTime,
     handleCreateNewCycle,
     handleInterruptCycle,

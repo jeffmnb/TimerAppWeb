@@ -1,13 +1,11 @@
 import React from "react"
 import { S } from "./TimerActions.styles"
 import { TimerActionsProps } from "./TimerActions.types"
-import { Controller } from "react-hook-form"
+import { Controller, useFormContext } from "react-hook-form"
 import { DataListSuggestions } from "../DataListSuggestions"
 
-export const TimerActions: React.FC<TimerActionsProps> = ({
-  control,
-  enableFields,
-}) => {
+export const TimerActions: React.FC<TimerActionsProps> = ({ enableFields }) => {
+  const { control } = useFormContext()
   return (
     <S.ActionsContainer>
       <S.FormText>Vou trabalhar em</S.FormText>
