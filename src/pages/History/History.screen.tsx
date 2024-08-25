@@ -1,6 +1,7 @@
 import React from "react"
 import { S } from "./History.styles"
 import { useHistoryPage } from "./History.logic"
+import { Render } from "../../global/components/Render/Render"
 
 export const History: React.FC = () => {
   const { history } = useHistoryPage()
@@ -19,15 +20,17 @@ export const History: React.FC = () => {
             </S.Tr>
           </S.Thead>
           <S.Tbody>
-            {history.map(({ begin, status, task, time }) => (
-              <S.Tr key={task}>
-                <S.Td>{task}</S.Td>
-                <S.Td>{time}</S.Td>
-                <S.Td>{begin}</S.Td>
-                <S.Td>
-                  <S.Status status={status} />
-                </S.Td>
-              </S.Tr>
+            {history.map(({ id, cycleTime, startTime, status, taskname }) => (
+              <Render.If isTrue={!!taskname} key={id}>
+                <S.Tr>
+                  <S.Td>{taskname}</S.Td>
+                  <S.Td>{cycleTime}</S.Td>
+                  <S.Td>{startTime.toString()}</S.Td>
+                  <S.Td>
+                    <S.Status status={status} />
+                  </S.Td>
+                </S.Tr>
+              </Render.If>
             ))}
           </S.Tbody>
         </S.Table>

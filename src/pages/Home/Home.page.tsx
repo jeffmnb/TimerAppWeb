@@ -10,7 +10,7 @@ import { FormProvider } from "react-hook-form"
 
 export const Home: React.FC = () => {
   const {
-    actualActiveCycle,
+    currentCycle,
     cycleForm,
     provideCycleTime,
     handleCreateNewCycle,
@@ -25,9 +25,9 @@ export const Home: React.FC = () => {
   return (
     <FormProvider {...cycleForm}>
       <S.Container>
-        <TimerActions enableFields={!!actualActiveCycle} />
+        <TimerActions enableFields={!!currentCycle} />
         <CountDown provideCycleTime={provideCycleTime()} />
-        <Render.If isTrue={!actualActiveCycle}>
+        <Render.If isTrue={!currentCycle}>
           <ActionButton
             icon={Play}
             title="Começar"
@@ -35,7 +35,7 @@ export const Home: React.FC = () => {
             onClick={handleSubmit(handleCreateNewCycle)}
           />
         </Render.If>
-        <Render.If isTrue={!!actualActiveCycle}>
+        <Render.If isTrue={!!currentCycle}>
           <ActionButton
             icon={HandPalm}
             title="Interromper"

@@ -1,7 +1,6 @@
-import { useStore } from "../../store"
+import { getTimerStore } from "../../store"
 
 export const useHistoryPage = () => {
-  // const [histories, setHistories] = useState<HistoryItemProps[]>()
-  const { history } = useStore()
+  const { history } = getTimerStore()
   return { history }
 }

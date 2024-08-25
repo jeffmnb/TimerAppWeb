@@ -3,35 +3,35 @@ import { createJSONStorage, devtools, persist } from "zustand/middleware"
 import { UseStoreProps } from "./useStore.types"
 
 const initialStoreValue = {
-  history: [
-    {
-      cycleTime: 0,
-      id: "",
-      startTime: new Date(),
-      status: "finished",
-      taskname: "",
-    },
-  ],
+  history: [],
+  currentCycle: null,
 } as UseStoreProps
 
-export const useStore = create<UseStoreProps>()(
+const useTimerStore = create<UseStoreProps>()(
   devtools(
     persist(
       (set) => ({
         ...initialStoreValue,
-        setHistory: (newCycle) =>
+        setHistory: (newHistory) =>
           set(
-            ({ history }) => ({
-              history: [...history, newCycle],
+            () => ({
+              history: newHistory,
             }),
             false,
             "setHistory",
           ),
+        setCurrentCycle: (currentCycle) =>
+          set(() => ({ currentCycle }), false, "setCurrentCycle"),
       }),
       {
         name: "@timer-app-store",
         storage: createJSONStorage(() => sessionStorage),
       },
     ),
+    {
+      trace: true,
+    },
   ),
 )
+
+export const getTimerStore = useTimerStore.getState

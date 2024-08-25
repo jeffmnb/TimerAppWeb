@@ -9,6 +9,8 @@ export type Cycle = {
   cycleTime: number
   startTime: Date
   status: StatusCycle
+  finalMinutes?: string
+  finalSeconds?: string
 }
 
 export type StatusCycle = "finished" | "interrupted" | "progress"

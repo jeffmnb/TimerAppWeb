@@ -1,6 +1,8 @@
 import { Cycle } from "../pages/Home/Home.types"
 
 export type UseStoreProps = {
-  history: Cycle[]
-  setHistory: (newCycle: Cycle) => void
+  currentCycle: Cycle | null
+  history: Cycle[] | []
+  setHistory: (newHistory: Cycle[]) => void
+  setCurrentCycle: (cycle: Cycle | null) => void
 }

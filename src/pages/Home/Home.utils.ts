@@ -1,11 +1,12 @@
 import * as zod from "zod"
-import { Cycle, FormSchemaInput } from "./Home.types"
+import { Cycle, FormSchemaInput, StatusCycle } from "./Home.types"
+import { getTimerStore } from "../../store"
 
 export const formSchema = zod.object({
   taskname: zod.string().min(1, "Informe a tarefa"),
   cycleTime: zod
     .number({ message: "Ciclo obrigatório" })
-    .min(0.1, "Ciclo deve ter ao menos 5 minutos")
+    .min(0.1, "Ciclo deve ter ao menos 1 minuto")
     .max(60, "Ciclo deve ter no máximo 60 minutos"),
 })
 
@@ -30,5 +31,23 @@ export const returnCycleTime = (
   const finalMinutes = String(minutesAmount).padStart(2, "0")
   const finalSeconds = String(secondsAmount).padStart(2, "0")
 
-  return { finalMinutes, finalSeconds }
+  return { finalMinutes, finalSeconds, secondsAmount }
+}
+
+export const getCycleAndUpdateStatus = (statusToUpdate: StatusCycle) => {
+  const {
+    history,
+    currentCycle: actualActiveCycle,
+    setHistory,
+    setCurrentCycle,
+  } = getTimerStore()
+  const currentCycle = history.find(
+    (cycle) => cycle.id === actualActiveCycle?.id,
+  )
+  const updatedCycle = { ...currentCycle, status: statusToUpdate } as Cycle
+  const historyUpdated = history.map((cycle) =>
+    cycle.id === updatedCycle.id ? updatedCycle : cycle,
+  )
+  setHistory(historyUpdated)
+  setCurrentCycle(null)
 }
