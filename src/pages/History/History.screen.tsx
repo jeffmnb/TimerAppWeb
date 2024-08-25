@@ -4,7 +4,8 @@ import { useHistoryPage } from "./History.logic"
 import { Render } from "../../global/components/Render/Render"
 
 export const History: React.FC = () => {
-  const { history } = useHistoryPage()
+  const { history, formatCycleBeginDate, formatDurationCycle } =
+    useHistoryPage()
 
   return (
     <S.Container>
@@ -14,7 +15,7 @@ export const History: React.FC = () => {
           <S.Thead>
             <S.Tr>
               <S.Th>Tarefa</S.Th>
-              <S.Th>Duração</S.Th>
+              <S.Th>Duração Prevista</S.Th>
               <S.Th>Início</S.Th>
               <S.Th>Status</S.Th>
             </S.Tr>
@@ -24,8 +25,8 @@ export const History: React.FC = () => {
               <Render.If isTrue={!!taskname} key={id}>
                 <S.Tr>
                   <S.Td>{taskname}</S.Td>
-                  <S.Td>{cycleTime}</S.Td>
-                  <S.Td>{startTime.toString()}</S.Td>
+                  <S.Td>{formatDurationCycle(cycleTime)}</S.Td>
+                  <S.Td>{formatCycleBeginDate(startTime)}</S.Td>
                   <S.Td>
                     <S.Status status={status} />
                   </S.Td>

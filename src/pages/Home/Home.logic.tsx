@@ -6,6 +6,7 @@ import {
   formDefaultValues,
   formSchema,
   getCycleAndUpdateStatus,
+  getSecondsPassed,
   returnCycleTime,
 } from "./Home.utils"
 import { useCallback, useEffect, useState } from "react"
@@ -21,9 +22,7 @@ export const useHomePage = () => {
   const { setHistory, setCurrentCycle, currentCycle, history } = getTimerStore()
 
   const [cycleList, setCycleList] = useState<Cycle[]>(history)
-  const [secondsPassed, setSecondsPassed] = useState<number>(
-    differenceInSeconds(new Date(), currentCycle?.startTime || 0),
-  )
+  const [secondsPassed, setSecondsPassed] = useState<number>(getSecondsPassed())
 
   const handleCreateNewCycle = ({ cycleTime, taskname }: FormSchemaOutput) => {
     const newCycle: Cycle = {
@@ -53,7 +52,11 @@ export const useHomePage = () => {
   }
 
   const provideCycleTime = useCallback(() => {
-    return returnCycleTime(cycleList, currentCycle, secondsPassed)
+    return returnCycleTime(
+      cycleList,
+      currentCycle,
+      secondsPassed > 0 ? secondsPassed : 0,
+    )
   }, [currentCycle, cycleList, secondsPassed])
 
   useEffect(() => {
@@ -64,6 +67,7 @@ export const useHomePage = () => {
           new Date(),
           currentCycle.startTime,
         )
+
         setSecondsPassed(timeHasPassed)
         if (provideCycleTime()?.secondsAmount === 1) {
           return getCycleAndUpdateStatus("finished")

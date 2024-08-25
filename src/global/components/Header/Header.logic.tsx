@@ -7,5 +7,7 @@ export const useHeader = () => {
     navigate(destination)
   }
 
-  return { redirectTo }
+  const isPageSelected = (page: string) => location.pathname === page
+
+  return { redirectTo, isPageSelected }
 }

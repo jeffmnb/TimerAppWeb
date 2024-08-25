@@ -3,13 +3,19 @@ import { S } from "./Header.styles"
 import { useHeader } from "./Header.logic"
 
 export const Header: React.FC = () => {
-  const { redirectTo } = useHeader()
+  const { redirectTo, isPageSelected } = useHeader()
   return (
     <S.Container>
       <S.Logo />
       <S.IconsContainer>
-        <S.TimerIcon onClick={() => redirectTo("/")} />
-        <S.ScrollIcon onClick={() => redirectTo("/history")} />
+        <S.TimerIcon
+          isActive={isPageSelected("/")}
+          onClick={() => redirectTo("/")}
+        />
+        <S.ScrollIcon
+          isActive={isPageSelected("/history")}
+          onClick={() => redirectTo("/history")}
+        />
       </S.IconsContainer>
     </S.Container>
   )
